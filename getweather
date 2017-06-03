@@ -1,0 +1,36 @@
+#!/bin/bash
+function getdata(){
+echo $DATA > file
+echo Description: $(jq -r .weather[].description file)
+echo Main: $(jq -r .weather[].main file)
+echo Id: $(jq -r .weather[].id file)
+echo Icon: $(jq -r .weather[].icon file)
+echo Temperature: $(jq -r .main.temp file) "°C"
+echo Temperature min: $(jq -r .main.temp_min file) "°C"
+echo Temperature max: $(jq -r .main.temp_max file) "°C"
+echo Pressure: $(jq -r .main.pressure file) "hPa"
+echo Humidity: $(jq -r .main.humidity file) "%"
+echo Visibility: $(jq -r .visibility file) "m"
+RISE=$(jq -r .sys.sunrise file)
+echo Sunrise: $(date -d @$RISE)
+SET=$(jq -r .sys.sunset file)
+echo Sunset: $(date -d @$SET)
+echo Country: $(jq -r .sys.country file)
+echo City: $(jq -r .name file)
+echo Id: $(jq -r .id file)
+UP=$(jq -r .dt file)
+echo Update Time: $(date -d @$UP)
+}
+
+if [ $1 = -l ] && [ $3 = -p ]
+then
+URL=("http://api.openweathermap.org/data/2.5/weather?q=$2,$4&units=metric&mode=json&appid=3e8086a52e4da31a82e59e505a6ed51c")
+DATA=$(curl $URL)
+getdata
+elif [ $# -eq 1 ]
+then
+DATA=$(curl "http://api.openweathermap.org/data/2.5/weather?id=$1&units=metric&mode=json&appid=3e8086a52e4da31a82e59e505a6ed51c")
+getdata
+else
+	echo "Dados Incorretos Inseridos, verique se o ID está correcto ou as opções -l e -p caso esteja a procurar com cidade e sigla do pais"
+fi

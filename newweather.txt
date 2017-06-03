@@ -1,0 +1,16 @@
+Description: clear sky
+Main: Clear
+Id: 800
+Icon: 01d
+Temperature: 19.08 °C
+Temperature min: 18 °C
+Temperature max: 20 °C
+Pressure: 1014 hPa
+Humidity: 37 %
+Visibility: 10000 m
+Sunrise: Fri Jun 2 20:47:06 PDT 2017
+Sunset: Sat Jun 3 13:11:04 PDT 2017
+Country: GB
+City: London
+Id: 2643743
+Update Time: Sat Jun 3 05:20:00 PDT 2017
